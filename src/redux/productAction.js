@@ -29,7 +29,6 @@ export const getProductList = () => async dispacth => {
 
 export const editProduct = (data) => async dispacth => {
     try {
-        // const products = await axios.patch('/products', data)
         dispacth({
             type: EDIT_PRODUCT,
             payload: data
@@ -53,11 +52,11 @@ export const cancel = (data) => async dispacth => {
 export const updateProduct = (data) => async dispacth => {
     try {
         axios.put('/products/'+ data.id , data)
-        console.log(data);
         dispacth({
             type: UPDATE_PRODUCT,
             payload: data
         });
+        alert("Update success")
     } catch ( err ) {
         console.log(err);
     }
