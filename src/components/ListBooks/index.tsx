@@ -5,7 +5,6 @@ import "./ListBooks.css"
 import * as BookServices from "../../service/BookServices.ts"
 import {Book} from "../../types"
 import DeleteDialog from "../DeleteDialog/index"
-import EditFormBook from "../EditFormBook/index"
 
 const ListBooks = () => {
     const listBooks: any = useSelector((state) => state);
@@ -25,7 +24,6 @@ const ListBooks = () => {
 
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [isModalEdit, setIsModalEdit] = useState(false);
-    const [idEdit, setIdEdit] = useState('');
 
     const showModal = () => {
         setIsModalVisible(true);
@@ -60,10 +58,7 @@ const ListBooks = () => {
                         <td> {book.name} </td>
                         <td> {book.price} </td>
                         <td>
-                            <button onClick={()=>{
-                                setIdEdit(book.id);
-                                setIsModalEdit(true);
-                            }} > Edit</button>
+                            <button> Edit</button>
                             <button onClick={() => showModal()}> Delete
                             </button>
 
@@ -74,9 +69,7 @@ const ListBooks = () => {
                 })}
 
             </table>
-            <EditFormBook idBook={idEdit}
-                          isModalEdit={isModalEdit} handleCancel={()=>(setIsModalEdit(false))}
-            />
+            
         </div>
     );
 }
