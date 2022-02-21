@@ -1,14 +1,20 @@
-import { createStore, applyMiddleware } from "redux";
+import { createStore, applyMiddleware, MiddlewareAPI, Dispatch } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
+import { dispatch } from "../model";
 import rootReducer from "./reducer";
 
-const middleware: any[] = [];
+
+const AsyncMiddleWare = (store: any) => (next: any) => (action: any) => {
+  if(typeof action === "function") {
+    return action(next);
+  }
+  return next(action)
+}
 
 const store = createStore(
   rootReducer,
   composeWithDevTools(
-    applyMiddleware(...middleware)
-    // other store enhancers if any
+    applyMiddleware(AsyncMiddleWare)
   )
 );
 
