@@ -1,24 +1,19 @@
+import { Routes, Route, Link } from 'react-router-dom'
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Add from './component/Add'
+import Delete from './component/Delete';
+import List from './component/List';
+import Update from './component/Update';
 
 const App: React.FC = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <List/>
+      <Routes>
+         <Route path='/add' element={<Add/>}/>
+         <Route path='/update' element={<Update/>}/>
+         <Route path='/delete' element={<Delete/>}/>
+      </Routes>
     </div>
   );
 }
