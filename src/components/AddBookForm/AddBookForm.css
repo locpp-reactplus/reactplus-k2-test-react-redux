@@ -1,0 +1,32 @@
+.form_container {
+    display: flex;
+    flex-direction: column;
+}
+
+.form_btn{
+    align-self: end;
+}
+
+.form_save{
+    /*background: red;*/
+    /*color: white;*/
+    margin-right: 30px;
+    padding: 0 20px;
+    line-height: 25px;
+}
+
+.form_cancel{
+    /*margin-right: 10px;*/
+    padding: 0 20px;
+    line-height: 25px;
+}
+
+
+.form_input{
+    margin-bottom: 20px;
+}
+
+.form_input input{
+    width: 100%;
+    padding: 4px 10px;
+}

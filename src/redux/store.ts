@@ -1,17 +1,9 @@
-import { createStore, applyMiddleware } from "redux";
-import { composeWithDevTools } from "redux-devtools-extension";
-import rootReducer from "./reducer";
+import { createStore } from "redux";
 
-const middleware: any[] = [];
+import {Reducer} from "./reducer"
 
-const store = createStore(
-  rootReducer,
-  composeWithDevTools(
-    applyMiddleware(...middleware)
-    // other store enhancers if any
-  )
-);
+let store = createStore(Reducer);
+
+store.subscribe(() => console.log(store.getState()));
 
 export default store;
-
-export type RootState = ReturnType<typeof store.getState>;

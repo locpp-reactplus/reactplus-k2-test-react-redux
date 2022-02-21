@@ -1,5 +1,10 @@
-export type User = {
+export type Book = {
   readonly id: string;
-  username: string;
-  full_name: string;
+  name: string;
+  price: number;
+};
+
+export type action = {
+  type : string,
+  payload : any
 };
