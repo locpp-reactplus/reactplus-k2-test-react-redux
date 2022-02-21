@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { RemoveProduct } from '../../redux/Product/productAction';
@@ -5,7 +6,7 @@ function Delete(props) {
     const dispatch = useDispatch()
     const handleDelete = (id)=>
     {
-        dispatch(RemoveProduct(id))
+       axios.delete(`https://61b75f1864e4a10017d18ada.mockapi.io/api/products/${id}`)
     }
     return (
         <>
@@ -28,7 +29,7 @@ function Delete(props) {
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                            <button onClick={()=>handleDelete()} type="button" className="btn btn-primary">Xóa</button>
+                            <button onClick={()=>handleDelete(props.id)} type="button" className="btn btn-primary">Xóa</button>
                         </div>
                     </div>
                 </div>

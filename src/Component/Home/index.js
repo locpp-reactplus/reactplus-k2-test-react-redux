@@ -35,7 +35,7 @@ function Home(props) {
                 <td>{prod.product_name}</td>
                 <button onClick={()=>{handleUpdate(prod.product_code, prod.product_name)}} type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#update">Update</button>
                 <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#delete">Xóa</button>
-                <Delete />
+                <Delete id={prod.id} />
                 <Update/>
             </tr>
         ))
@@ -51,7 +51,6 @@ function Home(props) {
             <table class="text-center table">
                 <thead class="thead-dark">
                     <tr>
-                        <th scope="col"></th>
                         <th scope="col">Mã sản phẩm</th>
                         <th scope="col">Tên sản phẩm</th>
                         <th scope="col"></th>
