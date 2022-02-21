@@ -1,0 +1,17 @@
+.ListUser_app {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  .ListUser {
+    width: 100%;
+    border: 1px solid;
+    th {
+      text-align: inherit;
+    }
+    tr {
+    }
+    .Edit {
+      text-align: center;
+    }
+  }
+}

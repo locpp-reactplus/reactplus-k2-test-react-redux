@@ -1,0 +1,11 @@
+.DeleteData {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 50px;
+  margin-left: 100px;
+  .list_delete {
+    border: 1px solid;
+    width: 250px;
+  }
+}
