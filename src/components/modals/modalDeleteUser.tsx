@@ -1,10 +1,10 @@
-import Loading from '../../assets/Eclipse-1s-200px.gif';
-import { ActionDeleteUser } from '../../redux/action';
-import { Button, Modal } from 'antd';
-import { DeleteUser } from '../../axios/axios.request';
-import { useDispatch } from 'react-redux';
-import { userInterface } from '../../model';
-import { useState } from 'react';
+import Loading from "../../assets/Eclipse-1s-200px.gif";
+import { ActionDeleteUser } from "../../redux/action";
+import { Button, Modal } from "antd";
+import { DeleteUser } from "../../axios/axios.request";
+import { useDispatch } from "react-redux";
+import { userInterface } from "../../model";
+import { useState } from "react";
 
 interface InitialProps {
   isModalVisible: boolean;
@@ -34,6 +34,7 @@ const ModalDeleteUser = ({
     <Modal
       title="Delete User"
       visible={isModalVisible}
+      onCancel={handleCancel}
       footer={[
         <Button
           key="cancel"

@@ -44,6 +44,7 @@ export const ModalEditUser = ({
     <Modal
       title="Edit User"
       visible={isModalVisible}
+      onCancel={handleCancel}
       footer={[
         <Button
           key="cancel"

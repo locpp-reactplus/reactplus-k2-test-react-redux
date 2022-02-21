@@ -36,6 +36,7 @@ export const ModalAddUser = ({ isModalVisible, handleOk }: InitialProps) => {
     <Modal
       title="Add New User"
       visible={isModalVisible}
+      onCancel={closeModal}
       footer={[
         <Button
           key="cancel"
