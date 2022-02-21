@@ -1,10 +1,13 @@
-import { createStore, applyMiddleware, MiddlewareAPI, Dispatch } from "redux";
+import { Dispatch } from 'redux';
+import { createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { dispatch } from "../model";
 import rootReducer from "./reducer";
 
 
-const AsyncMiddleWare = (store: any) => (next: any) => (action: any) => {
+type middleWareActionType = dispatch | ((Dispatch: Dispatch) => dispatch)
+
+const AsyncMiddleWare = (store: any) => (next: Dispatch) => (action: middleWareActionType) => {
   if(typeof action === "function") {
     return action(next);
   }

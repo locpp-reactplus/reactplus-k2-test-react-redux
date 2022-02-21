@@ -1,12 +1,10 @@
-import { Table, Space } from "antd";
-import { useDispatch, useSelector } from "react-redux";
-import { userInterface } from "../../model";
-import { Button } from "antd";
-import { AsyncDeleteUser } from "../../redux/action";
-import React, { useState } from "react";
 import ModalDeleteUser from "../modals/modalDeleteUser";
+import React, { useState } from "react";
 import { ModalEditUser } from "../modals/modalEditUser";
+import { Space, Table, Button } from "antd";
+import { useSelector } from "react-redux";
 import { useEffect } from "react";
+import { userInterface } from "../../model";
 
 const InitialModalPropsOption = {
   isDeleteModalVisible: false,
@@ -20,7 +18,6 @@ const InitialModalPropsOption = {
 
 const UserTable = () => {
   const users = useSelector((store: any) => store.users);
-  const dispatch = useDispatch();
   const [modalPropsOption, setModalPropsOption] = useState(
     InitialModalPropsOption
   );
@@ -29,20 +26,28 @@ const UserTable = () => {
       title: "Name",
       dataIndex: "name",
       id: "name",
-      width: '40%',
-      render: (text: string) => <p>{text}</p>,
+      width: "40%",
+      render: (text: string) => (
+        <p style={{ wordBreak: "break-word", textTransform: "capitalize" }}>
+          {text}
+        </p>
+      ),
     },
     {
       title: "Full Name",
       dataIndex: "fullName",
       id: "fullName",
-      width: '40%',
-
+      width: "40%",
+      render: (text: string) => (
+        <p style={{ wordBreak: "break-word", textTransform: "capitalize" }}>
+          {text}
+        </p>
+      ),
     },
     {
       title: "Action",
       id: "action",
-      width: '20%',
+      width: "20%",
 
       render: (data: userInterface) => {
         return (

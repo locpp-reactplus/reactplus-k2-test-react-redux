@@ -1,10 +1,10 @@
-import { Modal } from "antd";
-import { Form, Input, Button } from "antd";
-import { useEffect, useRef, useState } from "react";
-import { useDispatch } from "react-redux";
-import { ActionEditUser, AsyncAddUser } from "../../redux/action";
-import { userInterface } from "../../model";
+import Loading from "../../assets/Eclipse-1s-200px.gif";
+import { ActionEditUser } from "../../redux/action";
+import { Button, Form, Input, Modal } from "antd";
 import { EditUser } from "../../axios/axios.request";
+import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { userInterface } from "../../model";
 
 interface InitialProps {
   isModalVisible: boolean;
@@ -21,10 +21,14 @@ export const ModalEditUser = ({
 }: InitialProps) => {
   const [editUser, setEditUser] = useState(user);
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
 
-  const modalSubmit = async () => {
+  const submitModal = async () => {
+    setLoading(true);
+
     const response = await EditUser(editUser);
     dispatch(ActionEditUser(response));
+    setLoading(false);
     handleOk();
   };
 
@@ -38,22 +42,48 @@ export const ModalEditUser = ({
   }, [user]);
   return (
     <Modal
-      title="Edit Data"
+      title="Edit User"
       visible={isModalVisible}
-      onOk={modalSubmit}
-      onCancel={handleCancel}
+      footer={[
+        <Button
+          key="cancel"
+          onClick={handleCancel}
+          style={{ width: "100px", height: "40px" }}
+        >
+          Cancel
+        </Button>,
+        <Button
+          type="primary"
+          key="submit"
+          disabled={Boolean(!editUser.name.length || !editUser.fullName.length)}
+          onClick={() => {
+            !loading && submitModal();
+          }}
+          style={{ width: "100px", height: "40px" }}
+        >
+          {loading ? (
+            <img
+              src={Loading}
+              alt="loading"
+              style={{ height: "100%", width: "auto" }}
+            />
+          ) : (
+            "Submit"
+          )}
+        </Button>,
+      ]}
     >
       <Form
         name="wrap"
-        initialValues={{ name: editUser.name, fullName: editUser.fullName}}
+        initialValues={{ name: editUser.name, fullName: editUser.fullName }}
         labelCol={{ flex: "110px" }}
         labelAlign="left"
         wrapperCol={{ flex: 1 }}
         colon={false}
         onFinish={() => {
-          modalSubmit();
+          submitModal();
         }}
-        // onFinishFailed={modalSubmit}
+        // onFinishFailed={submitModal}
       >
         <Form.Item label="First Name" name="name" rules={[{ required: true }]}>
           <Input

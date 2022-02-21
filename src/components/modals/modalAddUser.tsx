@@ -1,21 +1,15 @@
-import { Modal } from "antd";
-import { Form, Input, Button } from "antd";
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { AddUser } from "../../axios/axios.request";
-import { ActionAddUser } from "../../redux/action";
 import Loading from "../../assets/Eclipse-1s-200px.gif";
+import { ActionAddUser } from "../../redux/action";
+import { AddUser } from "../../axios/axios.request";
+import { Button, Form, Input, Modal } from "antd";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
 interface InitialProps {
   isModalVisible: boolean;
   handleOk: () => void;
-  handleCancel: () => void;
 }
 
-export const ModalAddUser = ({
-  isModalVisible,
-  handleOk,
-  handleCancel,
-}: InitialProps) => {
+export const ModalAddUser = ({ isModalVisible, handleOk }: InitialProps) => {
   const [user, setUser] = useState({ name: "", fullName: "" });
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
@@ -42,10 +36,34 @@ export const ModalAddUser = ({
     <Modal
       title="Add New User"
       visible={isModalVisible}
-      onOk={handleOk}
-      onCancel={() => {
-        closeModal();
-      }}
+      footer={[
+        <Button
+          key="cancel"
+          onClick={closeModal}
+          style={{ width: "100px", height: "40px" }}
+        >
+          Cancel
+        </Button>,
+        <Button
+          type="primary"
+          key="submit"
+          disabled={Boolean(!user.name.length || !user.fullName.length)}
+          onClick={() => {
+            !loading && submitModal();
+          }}
+          style={{ width: "100px", height: "40px" }}
+        >
+          {loading ? (
+            <img
+              src={Loading}
+              alt="loading"
+              style={{ height: "100%", width: "auto" }}
+            />
+          ) : (
+            "Submit"
+          )}
+        </Button>,
+      ]}
     >
       <Form
         name="wrap"
@@ -57,7 +75,6 @@ export const ModalAddUser = ({
         onFinish={() => {
           submitModal();
         }}
-        // onFinishFailed={submitModal}
       >
         <Form.Item label="First Name" name="name" rules={[{ required: true }]}>
           <Input
@@ -79,11 +96,6 @@ export const ModalAddUser = ({
               handleChange(e);
             }}
           />
-        </Form.Item>
-        <Form.Item label=" ">
-          <Button type="primary" htmlType="submit" style={{width: "100px", height: "40px"}}>
-            {loading ? <img src={Loading} alt="loading" style={{height: "100%", width: "auto"}} /> : "Submit"}
-          </Button>
         </Form.Item>
       </Form>
     </Modal>

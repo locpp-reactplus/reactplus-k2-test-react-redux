@@ -1,13 +1,14 @@
 import { combineReducers } from "redux";
-import { dispatch, userInterface } from "../model";
+import {  userInterface } from "../model";
 import { ActionType } from "./actionType";
 
-interface userAction {
-  type: string;
-  payload: userInterface | userInterface[] | string;
-};
+// interface userAction {
+//   type: string;
+//   payload: userInterface | userInterface[] | string;
+// };
 
-const UserReducer = (state: userInterface[] = [], action: any) => {
+// if action type is userAction then action.payload.id will cause error because of type userInterface[] and string.
+const UserReducer = (state: userInterface[] = [], action: any) => {   
   switch (action.type) {
     case ActionType.USER_INIT:
       return action.payload;
