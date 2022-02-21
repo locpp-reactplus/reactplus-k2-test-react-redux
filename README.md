@@ -1,3 +1,6 @@
+# deploy
+https://github.com/longks2312k/reactplus-k2-test-react-redux/tree/master/exam-2
+
 # Thư viện
   • Quản lý state: [Redux](https://redux.js.org/), [React-Redux](https://react-redux.js.org/) <br/>
   • Giao diện UI: [Antd Design](https://ant.design/) <br/>
