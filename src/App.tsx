@@ -1,26 +1,51 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Button } from "antd";
+import React, { useEffect, useState } from "react";
+import "antd/dist/antd.css";
+import UserTable from "./components/Table/table";
+import { Container } from "./components/styled/container.styled";
+import { useDispatch } from "react-redux";
+import { AsyncUserInit } from "./redux/action";
+import { ModalAddUser } from "./components/modals/modalAddUser";
+const App = () => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const dispatch = useDispatch();
 
-const App: React.FC = () => {
+  useEffect(() => {
+    dispatch(AsyncUserInit());
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <Container>
+        <div style={{display: "flex", gap: "20px", alignItems: "center"}}>
+        <Button
+          type="primary"
+          style={{margin: "10px 0"}}
+          size="large"
+          onClick={() => {
+            setIsModalVisible(true);
+          }}
         >
-          Learn React
-        </a>
-      </header>
+          Add
+        </Button>
+        <h1 style={{margin: '0'}}>Welcome to server</h1>
+
+        </div>
+        <UserTable />
+        {isModalVisible && (
+          <ModalAddUser
+            isModalVisible={isModalVisible}
+            handleOk={() => {
+              setIsModalVisible(false);
+            }}
+            handleCancel={() => {
+              setIsModalVisible(false);
+            }}
+          />
+        )}
+      </Container>
     </div>
   );
-}
+};
 
 export default App;

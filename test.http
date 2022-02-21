@@ -1,0 +1,11 @@
+post https://61ecf915f3011500174d2262.mockapi.io/user
+content-type: application/json
+
+{
+    "userName": "sample",
+    "fullName": "Wed, 21 Oct 2015 18:27:50 GMT"
+}
+
+###
+
+DELETE https://61ecf915f3011500174d2262.mockapi.io/user/2
