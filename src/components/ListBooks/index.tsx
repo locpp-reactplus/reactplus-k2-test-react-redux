@@ -26,6 +26,7 @@ const ListBooks = () => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [isModalEdit, setIsModalEdit] = useState(false);
     const [idEdit, setIdEdit] = useState('');
+    const [idDelete, setIdDelete] = useState('');
 
     const showModal = () => {
         setIsModalVisible(true);
@@ -63,12 +64,14 @@ const ListBooks = () => {
                             <button onClick={()=>{
                                 setIdEdit(book.id);
                                 setIsModalEdit(true);
-                            }} > Edit</button>
-                            <button onClick={() => showModal()}> Delete
+                            }} > Edit </button>
+
+                            <button onClick={() => {
+                                setIdDelete(book.id);
+                                showModal();
+                            }}> Delete
                             </button>
 
-                            <DeleteDialog isModalVisible={isModalVisible} showModal={showModal} handleCancel={handleCancel}
-                                          handleDelete={handleDelete} idBook={book.id} />
                         </td>
                     </tr>
                 })}
@@ -77,6 +80,9 @@ const ListBooks = () => {
             <EditFormBook idBook={idEdit}
                           isModalEdit={isModalEdit} handleCancel={()=>(setIsModalEdit(false))}
             />
+
+            <DeleteDialog isModalVisible={isModalVisible} showModal={showModal} handleCancel={handleCancel}
+                          handleDelete={handleDelete} idBook={idDelete} />
         </div>
     );
 }

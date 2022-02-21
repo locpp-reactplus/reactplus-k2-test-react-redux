@@ -7,15 +7,26 @@ import * as BookServices from "../../service/BookServices.ts"
 import {useDispatch, useSelector} from "react-redux";
 
 const EditFormBook = (props : any) => {
-    useEffect(()=>{
-        console.log(props.idBook);
-    } , [props.idBook])
 
     const listBooks: any = useSelector((state) => state);
     const dispatch = useDispatch();
 
     const [name , setName] = useState('');
     const [price , setPrice] = useState(0);
+
+    useEffect(()=>{
+        console.log(props.idBook);
+
+        BookServices.getBook(props.idBook)
+            .then((res)=>{
+                const book = res.data
+                setName(book.name);
+                setPrice(book.price);
+            })
+            .catch((err)=>{
+                throw err;
+            });
+    } , [props.idBook])
 
     const handleEdit = () => {
         console.log(props.idBook);

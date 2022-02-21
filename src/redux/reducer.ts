@@ -26,10 +26,15 @@ export function Reducer(state = initState, action : action) {
             return newBooks;
 
         case "EDIT_BOOK_ACTION":
-            return [
-                ...state,
-                action.payload
-            ];
+            const updateBook = state.map((book , index)=>{
+                if(book.id === action.payload.id){
+                    book.name = action.payload.name;
+                    book.price = action.payload.price
+                    return book;
+                }
+                return book;
+            });
+            return updateBook;
         default:
             return state;
     }

@@ -6,6 +6,10 @@ export const getAllBooks = async () => {
     return await axios.get(url);
 };
 
+export const getBook = async (id : string) => {
+    return await axios.get(url + "/" + id);
+};
+
 export const addBook = async ( name : string , price : number) => {
     return await axios.post(url, {
         name,
